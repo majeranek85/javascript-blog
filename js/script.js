@@ -50,7 +50,8 @@
     const articles = document.querySelectorAll(optArticleSelector);
     for(let article of articles){
       /* get the article id */
-      
+      const articleId = article.getAttribute('id');
+      console.log(articleId);
       /* find the article element */
 
       /* get the title from the title element */
