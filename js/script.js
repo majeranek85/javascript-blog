@@ -53,7 +53,8 @@
       const articleId = article.getAttribute('id');
       console.log(articleId);
       /* find the article element */
-
+      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+      console.log('Title: ' + articleTitle);
       /* get the title from the title element */
 
       /* create HTML of the link */
