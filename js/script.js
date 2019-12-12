@@ -16,7 +16,11 @@ const titleClickHandler = function(event){
     activeLink.classList.remove('active');
   }
   /* add class 'active' to the clicked link */
+  const activeArticles = document.querySelectorAll('.posts article.active');
 
+  for(let activeArticle of activeArticles){
+    activeArticle.classList.remove('active');
+  }
   /* remove class 'active' from all articles */
 
   /* get 'href' attribute form the clicked link */
