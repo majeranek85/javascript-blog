@@ -1,7 +1,7 @@
 {
-'use strict';
+  'use strict';
 
-//EVENT HANDLER
+  //EVENT HANDLER
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
@@ -14,7 +14,7 @@
       activeLink.classList.remove('active');
     }
     /* [DONE] add class 'active' to the clicked link */
-    clickedElement.classList.add('active')
+    clickedElement.classList.add('active');
     console.log('clickedElement', clickedElement);
     /* [DONE] remove class 'active' from all articles */
     const activeArticles = document.querySelectorAll('.posts article.active');
@@ -29,10 +29,10 @@
     const targetArticle = document.querySelector(articleSelector);
     console.log(targetArticle);
     /* [DONE] add class 'active' to the correct article */
-    targetArticle.classList.add('active')
+    targetArticle.classList.add('active');
   }
 
-//GENERATING LINKS
+  //GENERATING LINKS
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles';
