@@ -35,13 +35,13 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list';
 
-function generateTitleLinks(){
-
+function generateTitleLinks(customSelector = ''){
+  console.log(customSelector);
   /* remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
   /* for each article */
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
 
   let html = '';
 
@@ -142,7 +142,6 @@ const addClickListenersToTags = function(){
     tagLink.addEventListener('click', tagClickHandler);
   /* END LOOP: for each link */
   }
-
 }
 
 addClickListenersToTags();
