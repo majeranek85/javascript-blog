@@ -33,8 +33,9 @@ const titleClickHandler = function(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
-  optArticleAutorSelector = '.post-author'
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAutorSelector = '.post-author',
+  optTagsListSelector = '.tags .list';
 
 const generateTitleLinks = function(customSelector = ''){
   console.log(customSelector);
@@ -72,6 +73,8 @@ generateTitleLinks();
 
 //GENERATING TAGS
 const generateTags = function(){
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
   /*[DONE] find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   /*[DONE] START LOOP: for every article: */
@@ -90,12 +93,22 @@ const generateTags = function(){
       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
       /*[DONE] add generated code to html variable */
       html = linkHTML + html;
+      /* [NEW] check if this link is NOT already in allTags */
+      if(allTags.indexOf(linkHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(linkHTML);
+      }
     /*[DONE] END LOOP: for each tag */
     }
     /*[DONE] insert HTML of all the links into the tags wrapper */
     tagList.innerHTML = html;
   /*[DONE] END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
 }
 
 generateTags();
@@ -154,7 +167,7 @@ const generateAuthors = function(){
   /*[DONE] START LOOP: for every article: */
   for (let article of articles){
     /*[DONE] find authors list wrapper */
-    const author = article.querySelector('optArticleAutorSelector');
+    const author = article.querySelector(optArticleAutorSelector);
     /*[DONE] make html variable with empty string */
     let html = '';
     /*[DONE] get tags from data-author attribute */
