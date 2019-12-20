@@ -1,6 +1,15 @@
 
 'use strict';
 
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAutorSelector = '.post-author',
+  optTagsListSelector = '.tags .list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
+
 //EVENT HANDLER
 const titleClickHandler = function(event){
   event.preventDefault();
@@ -29,14 +38,7 @@ const titleClickHandler = function(event){
   targetArticle.classList.add('active');
 }
 
-//GENERATING LINKS
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list',
-  optArticleAutorSelector = '.post-author',
-  optTagsListSelector = '.tags .list';
-
+//GENERATING TITLE LINKS
 const generateTitleLinks = function(customSelector = ''){
   console.log(customSelector);
   /*[DONE] remove contents of titleList */
@@ -71,7 +73,28 @@ const generateTitleLinks = function(customSelector = ''){
 
 generateTitleLinks();
 
-//GENERATING TAGS
+const calculateTagsParams = function(tags){
+
+  const params = {max: 0, min: 999999}
+  console.log(params);
+    for (let tag in tags){
+      console.log(tag + ' is used ' + tags[tag] + ' times');
+      params.max = Math.max(tags[tag], params.max);
+      params.min = Math.min(tags[tag], params.min);
+    }
+  return params;
+}
+
+const calculateTagClass = function(count, params){
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor(percentage * (optCloudClassCount - 1) + 1);
+
+  return optCloudClassPrefix + classNumber;
+}
+
+//GENERATING TAG LINKS
 const generateTags = function(){
   /* [NEW] create a new variable allTags with an empty object */
   let allTags = {};
@@ -108,22 +131,26 @@ const generateTags = function(){
   }
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector('.tags');
-
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams);
   /* [NEW] create variable for all links HTML code*/
   let allTagsHTML = '';
   /*[NEW] START LOOP: for each tag in allTags:*/
   for (let tag in allTags){
+    const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '(' + allTags[tag] + ')' + '</a></li>';
+    console.log(tagLinkHTML);
     /*[NEW] generate code of a link and add it to allTagsHTML*/
-    allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag + '(' + allTags[tag] + ')' + '</a></li>';
+    allTagsHTML += tagLinkHTML;
   /*[NEW] END LOOP: for each tag in allTags:*/
   }
   /*[NEW] add html from allTagsHTML to tagList*/
   tagList.innerHTML = allTagsHTML;
-  console.log(allTagsHTML);
+  //console.log(allTagsHTML);
 }
 
 generateTags();
 
+//EVENT HANDLER
 const tagClickHandler = function(event){
   /*[DONE] prevent default action for this event */
   event.preventDefault();
@@ -158,9 +185,10 @@ const tagClickHandler = function(event){
   generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
+//EVENT LISTENER
 const addClickListenersToTags = function(){
   /*[DONE] find all links to tags */
-  const taglinks = document.querySelectorAll('.post-tags .list a');
+  const taglinks = document.querySelectorAll(' .list a');
   /*[DONE] START LOOP: for each link */
   for (let tagLink of taglinks){
     /*[DONE] add tagClickHandler as event listener for that link */
@@ -171,6 +199,7 @@ const addClickListenersToTags = function(){
 
 addClickListenersToTags();
 
+//GENERATING AUTHOR LINKS
 const generateAuthors = function(){
   /*[DONE] find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
@@ -196,6 +225,7 @@ const generateAuthors = function(){
 
 generateAuthors();
 
+//EVENT HANDLER
 const authorClickHandler = function(event){
   /*[DONE] prevent default action for this event */
   event.preventDefault();
@@ -231,6 +261,7 @@ const authorClickHandler = function(event){
 
 }
 
+//EVENT LISTENER
 const addClickListenersToAuthors = function(){
   /*[DONE] find all links to tags */
   const authorlinks = document.querySelectorAll('.post-author a');
