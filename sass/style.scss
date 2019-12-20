@@ -65,6 +65,9 @@ body {
   border-radius: 5px;
 }
 
+a {
+  text-decoration: none;
+}
 /* Logo */
 
 .logo {
@@ -122,4 +125,37 @@ body {
   p {
     margin: 0 10px 0 0;
   }
+}
+
+/* Tag Cloud */
+
+@mixin tag-style ($tag-size, $tag-color) {
+  font-size: $tag-size;
+  color: $tag-color;
+}
+
+.tag-size-1 {
+  @include tag-style (14px, #71777a);
+}
+
+.tag-size-2 {
+  @include tag-style (16px, #71777a);
+}
+
+.tag-size-3 {
+  @include tag-style (18px, #71777a);
+}
+
+.tag-size-4 {
+  @include tag-style (20px, #333333);
+}
+
+.tag-size-5 {
+  @include tag-style (20px, #333333);
+  font-weight: bold;
+}
+
+.tags li {
+  display: inline-block;
+  margin: 0 5px;
 }

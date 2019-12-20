@@ -57,6 +57,10 @@ body {
   border-radius: 5px;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Logo */
 .logo {
   font-family: "Sacramento", cursive;
@@ -107,5 +111,37 @@ body {
 
 .post-tags p {
   margin: 0 10px 0 0;
+}
+
+/* Tag Cloud */
+.tag-size-1 {
+  font-size: 14px;
+  color: #71777a;
+}
+
+.tag-size-2 {
+  font-size: 16px;
+  color: #71777a;
+}
+
+.tag-size-3 {
+  font-size: 18px;
+  color: #71777a;
+}
+
+.tag-size-4 {
+  font-size: 20px;
+  color: #333333;
+}
+
+.tag-size-5 {
+  font-size: 20px;
+  color: #333333;
+  font-weight: bold;
+}
+
+.tags li {
+  display: inline-block;
+  margin: 0 5px;
 }
 /*# sourceMappingURL=style.css.map */
