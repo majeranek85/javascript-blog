@@ -156,7 +156,6 @@ const generateTags = function(){
       className: calculateTagClass(allTags[tag], tagsParams)
     });
 
-    console.log(allTagsData);
   /*[NEW] END LOOP: for each tag in allTags:*/
   }
   /*[NEW] add html from allTagsHTML to tagList*/
